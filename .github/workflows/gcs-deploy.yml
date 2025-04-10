@@ -25,7 +25,7 @@ jobs:
 
       - name: Upload files to GCS
         run: |
-          gsutil -m cp -r site/* gs://akshatashenoy2311-blog
+          gsutil -m cp -r site-code/* gs://akshatashenoy2311-blog
 
       - name: List bucket contents
         run: |
