@@ -2,22 +2,31 @@ name: Deploy to GCS
 
 on:
   push:
-    branches: master   # or "master" if that's your branch
+    branches:
+      - main  # change this if your default branch is different
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repo
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Set up Google Cloud SDK
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: '${{ secrets.GCP_SA_KEY }}'  # Must be added in GitHub secrets
+
+      - name: Set up gcloud CLI
         uses: google-github-actions/setup-gcloud@v1
         with:
           version: 'latest'
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
 
       - name: Upload files to GCS
         run: |
-          gsutil -m cp -r ./ gs://akshatashenoy2311-blog
+          gsutil -m cp -r * gs://akshatashenoy2311-static-site
+
+      - name: List bucket contents
+        run: |
+          gsutil ls -r gs://akshatashenoy2311-static-site
