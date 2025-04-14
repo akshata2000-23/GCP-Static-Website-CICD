@@ -1,6 +1,4 @@
 ---
-
-```markdown
 # 🌐 GCP Static Website with CI/CD using GitHub Actions
 
 This project demonstrates how to host a **static website** on **Google Cloud Storage (GCS)** and set up a **CI/CD pipeline using GitHub Actions**. Every time a code change is pushed to the repo, it automatically updates the website content in the GCS bucket.
